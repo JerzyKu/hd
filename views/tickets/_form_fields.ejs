@@ -1,0 +1,19 @@
+
+    <div>
+        <label for="title">Title: </label>
+        <input name="title" type="text" value="<%= ticket.title %>" required>
+    </div>
+
+    <div>
+        <label for="description">Description: </label>
+        <textarea name="description" cols="30" rows="10" required><%= ticket.description %></textarea>
+    </div>
+
+    <DIV>
+        <label for="state">Status: </label>
+        <select name="state" id="">
+            <option value="Open">Open</option>
+            <option value="Close">Close</option>
+        </select>
+    </DIV>
+    
