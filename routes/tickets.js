@@ -16,6 +16,17 @@ router.get('/', async (req, res) => {
     }
 })
 
+router.get('/history', async (req, res) => {
+    let query = Ticket.find({state: 'Close'}).sort({createdAt: -1})
+    try {
+        const tickets = await query.exec()
+        res.render('tickets/index', {tickets: tickets})
+    } catch (e) {
+        console.log(e);
+        res.redirect('/tickets/new')
+    }
+})
+
 router.get('/new', (req,res) => {
     res.render('tickets/new', {ticket: new Ticket() })
 })

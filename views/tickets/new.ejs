@@ -1,9 +1,13 @@
 <h2 class="text-center">New Ticket</h2>
 
-<form action="/tickets/new" method="post">
-
-    <%- include('_form_fields') %> 
-
-    <a href="/tickets" class="btn btn-danger btn-sm">Cancel</a> 
-    <button type="submit"  class="btn btn-success btn-sm">Create</button>
-</form> 
+<div class="card offset-md-3 col-md-6">
+    <div class="card-body">
+        <form action="/tickets/new" method="post">
+        
+            <%- include('_form_fields') %>
+        
+            <a href="/tickets" class="btn btn-danger btn-sm">Cancel</a>
+            <button type="submit"  class="btn btn-success btn-sm">Create</button>
+        </form>
+    </div>
+</div>
