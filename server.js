@@ -11,13 +11,15 @@ const moment = require('moment');
 
 const ticketRouter = require('./routes/tickets')
 const indexRouter = require('./routes/index')
+const loginRouter = require('./routes/login')
 
 app.set('view engine', 'ejs')
 app.set('views', __dirname + '/views')
 app.set('layout', 'layouts/layout')
 app.use(expressLayouts)
 app.use(methodOverride('_method'))
-app.use(express.static('public'))
+app.use('/public', express.static('./public'))
+// app.use(express.static('public'))
 app.use(bodyParser.urlencoded({limit: '10mb', extended: false}))
 
 // connect to db 
@@ -31,5 +33,6 @@ db.once('open', e => console.log('Connected to mongoose'))
 
 app.use('/tickets', ticketRouter)
 app.use('/', indexRouter)
+app.use('/login', loginRouter)
 
 app.listen(process.env.PORT || 3000)

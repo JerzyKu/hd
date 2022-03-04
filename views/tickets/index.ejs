@@ -1,23 +1,24 @@
 <div class="ml-0 mr-0">
-    <h2 >Tickets: </h2>
+    <h2 class="text-center mv-2">Tickets: </h2>
 </div>
 <hr>
 
 <% if (tickets.length == 0) { %> 
-
-    <h2>No Tickets :)</h2>
+    <h2 class="text-center text-danger">No Tickets :)</h2>
 <% } %> 
 
-<% console.log(tickets); %> 
-<% console.log('-=-=-=-'); %> 
 
-<% tickets.forEach (ticket => { %>
-    <h3>&emsp;<%= ticket.title %> <br></h3>
-    <strong>Description:</strong> <%= ticket.description %> <br>
-    <strong>State:</strong> <%= ticket.state %> <br>
-    <strong>Created:</strong> <%= ticket.createdAt %> <br>
-    <a href="/tickets/<%= ticket.id %>" class="btn btn-primary btn-sm">View</a>
-    <a href="/tickets/<%= ticket.id %>/edit" class="btn btn-primary btn-sm">Edit</a> 
-    <a href="/tickets/<%= ticket.id %>/close" class="btn btn-primary btn-sm">Close</a>
-    <hr>
-<% }) %> 
+<div class="row">
+    <% tickets.forEach (ticket => { %>
+        <div class="overflow-hidden text-wrap col-xl-6 text-truncate">
+            <h3>&emsp;<%= ticket.title %></h3><br>
+            <strong>Description:</strong> <%= ticket.description %> <br>
+            <strong>State:</strong> <%= ticket.state %> <br>
+            <strong>Created:</strong> <%= ticket.createdAt %> <br>
+            <a href="/tickets/<%= ticket.id %>" class="btn btn-primary btn-sm">View</a>
+            <a href="/tickets/<%= ticket.id %>/edit" class="btn btn-primary btn-sm">Edit</a>
+            <a href="/tickets/<%= ticket.id %>/close" class="btn btn-primary btn-sm">Close</a>
+            <hr>
+        </div>
+    <% }) %>
+</div>

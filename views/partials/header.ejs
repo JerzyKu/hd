@@ -1,19 +1,29 @@
 <header>
     <nav class="navbar bg-primary navbar-dark navbar-expand-md">
     
-        <a href="#" class="navbar-brand">
-            <img src="./signpost.png" alt="H" width="30" height="30" class="d-inline-block mr-1 align-bottom"> HelpDesk
-        </a>
+        <div class="mr-auto text-right">
+            <a href="#" class="navbar-brand">
+                <img src="/public/imgs/signpost_better_white.png" alt="H" width="30" height="30" class="d-inline-block mr-1 align-bottom"> HelpDesk
+            </a>
+        </div>
     
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#a">
             <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="a">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><a href="/tickets" class="nav-link"><strong>All</strong></a></li>
                 <li class="nav-item"><a href="/tickets/new" class="nav-link"><strong>New</strong></a></li>
-                <li class="nav-item"><a href="#" class="nav-link"><strong>Settings</strong></a></li>
+
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"><strong>Account</strong></a>
+
+                    <div class="dropdown-menu">
+                        <a href="#" class="dropdown-item">Settings</a>
+                        <a href="#" class="dropdown-item">Log Out</a>
+                    </div>
+                </li>
             </ul>
         </div>
     
