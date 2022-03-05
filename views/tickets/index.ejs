@@ -6,7 +6,7 @@
 <% if (tickets.length == 0) { %> 
     <h2 class="text-center text-danger">No Tickets :)</h2>
 <% } %> 
-
+<i class="fa-light fa-signs-post"></i>
 
 <div class="row">
     <% tickets.forEach (ticket => { %>
@@ -17,7 +17,7 @@
                     <hr>
                     <strong>Description:</strong> <p class="text-truncate"><%= ticket.description %></p> <br>
                     <strong>State:</strong> <%= ticket.state %> <br>
-                    <strong>Created:</strong> <p class="text-truncate"><%= ticket.createdAt %></p>
+                    <strong>Created:</strong> <p class="text-truncate"><%= String(ticket.createdAt).slice(4, 21) %></p>
                     <hr>
                     <a href="/tickets/<%= ticket.id %>" class="btn btn-primary btn-sm">View</a>
                     <a href="/tickets/<%= ticket.id %>/edit" class="btn btn-primary btn-sm">Edit</a>
