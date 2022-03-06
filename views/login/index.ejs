@@ -20,13 +20,13 @@
                 <hr>
                 <p class="text-success text-center"><%= Message %></p>
                 <p class="text-danger text-center"><%= err %></p>
-                <form>
+                <form method="post" action="/login">
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                             </div>
-                            <input name="" class="form-control" placeholder="Email or login" type="email">
+                            <input name="" class="form-control" placeholder="Email" type="email" name="email">
                         </div> <!-- input-group.// -->
                     </div> <!-- form-group// -->
                     <div class="form-group">
@@ -34,7 +34,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                             </div>
-                            <input class="form-control" placeholder="******" type="password">
+                            <input class="form-control" placeholder="******" type="password" name="password">
                         </div> <!-- input-group.// -->
                     </div> <!-- form-group// -->
                     <div class="form-group">

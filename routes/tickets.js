@@ -68,6 +68,7 @@ router.put('/:id', async (req, res) => {
         ticket = await Ticket.findById(req.params.id)
         ticket.title = req.body.title
         ticket.state = req.body.state
+        ticket.description = req.body.description
         await ticket.save()
         res.redirect(`/tickets/${ticket.id}`)
     } catch (e) {

@@ -35,4 +35,4 @@ app.use('/tickets', ticketRouter)
 app.use('/', indexRouter)
 app.use('/login', loginRouter)
 
-app.listen(process.env.PORT || 3000)
+app.listen(process.env.PORT || 3000, () => {console.log(`App listen on port: ${process.env.PORT || 3000}`)})

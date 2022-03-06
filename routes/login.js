@@ -13,6 +13,11 @@ router.get('/logout', async (req, res) => {
     res.render('login/index', { Message: "Wylogowano", err: '' })
 })
 
+router.post('/', (req, res) => {
+    let username = req.body.email
+    let password = req.body.password
+    res.render('login/index',{Message:`Username: ${username} Password: ${password}`, err: ''})
+})
 
 
 module.exports = router
