@@ -17,13 +17,14 @@
                 <li class="nav-item active"><a href="/tickets/new" class="nav-link"><strong>New</strong></a></li>
                 <li class="nav-item active"><a href="/tickets" class="nav-link"><strong>All</strong></a></li>
                 <li class="nav-item active"><a href="/tickets/history" class="nav-link"><strong>History</strong></a></li>
+                <%- include('./logOut.ejs') %>
 
                 <li class="nav-item dropdown active">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"><strong>Account</strong></a>
 
                     <div class="dropdown-menu">
                         <a href="#" class="dropdown-item">Settings</a>
-                        <a href="/login/logout" class="dropdown-item">Log Out</a>
+                        <%- include('./logOut.ejs') %>
                     </div>
                 </li>
             </ul>

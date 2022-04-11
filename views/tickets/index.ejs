@@ -1,29 +1,35 @@
-<div class="ml-0 mr-0">
-    <h2 class="text-center mv-2">Tickets: </h2>
-</div>
-<hr>
+<%- include('../partials/header') %>
 
-<% if (tickets.length == 0) { %> 
-    <h2 class="text-center text-danger">No Tickets :)</h2>
-<% } %> 
-<i class="fa-light fa-signs-post"></i>
-
-<div class="row">
-    <% tickets.forEach (ticket => { %>
-        <div class="overflow-hidden text-wrap col-xl-6 text-truncate ">
-            <div class="card my-3">
-                <div class="card-body">
-                    <h3><%= ticket.title %></h3>
-                    <hr>
-                    <strong>Description:</strong> <p class="text-truncate"><%= ticket.description %></p> <br>
-                    <strong>State:</strong> <%= ticket.state %> <br>
-                    <strong>Created:</strong> <p class="text-truncate"><%= String(ticket.createdAt).slice(4, 21) %></p>
-                    <hr>
-                    <a href="/tickets/<%= ticket.id %>" class="btn btn-primary btn-sm">View</a>
-                    <a href="/tickets/<%= ticket.id %>/edit" class="btn btn-primary btn-sm">Edit</a>
-                    <a href="/tickets/<%= ticket.id %>/close" class="btn btn-primary btn-sm">Close</a>
+<div class="container">
+    
+    <div class="ml-0 mr-0">
+        <h2 class="text-center mv-2">Tickets: </h2>
+    </div>
+    <hr>
+    
+    <% if (tickets.length == 0) { %>
+        <h2 class="text-center text-danger">No Tickets :)</h2>
+    <% } %>
+    
+    <div class="row">
+        <% tickets.forEach (ticket => { %>
+            <div class="overflow-hidden text-wrap col-xl-6 text-truncate ">
+                <div class="card my-3">
+                    <div class="card-body">
+                        <h3 class="card-title"><%= ticket.title %></h3>
+                        <!-- <strong>Description:</strong>  -->
+                        <p class="text-truncate"><%= ticket.description %></p> <br>
+                        <strong>State:</strong><span class="text-muted"> <%= ticket.state %></span> <br>
+                        <p class="text-truncate"><strong>Created: </strong><span class="text-muted"><%= String(ticket.createdAt).slice(4, 21) %></span></p>
+                        </div>
+                    <div class="card-footer">
+                        <a href="/tickets/<%= ticket.id %>" class="btn btn-primary btn-sm">View</a>
+                        <a href="/tickets/<%= ticket.id %>/edit" class="btn btn-primary btn-sm">Edit</a>
+                        <a href="/tickets/<%= ticket.id %>/close" class="btn btn-primary btn-sm">Close</a>
+                    
+                    </div>
                 </div>
             </div>
-        </div>
-    <% }) %>
+        <% }) %>
+    </div>
 </div>

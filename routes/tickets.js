@@ -1,11 +1,10 @@
 const express = require('express')
 const router = express.Router()
+const checkAuthenticated = require('../middleware/checkAuthenticated')
 
 const Ticket = require('../models/ticket')
 
-const moment = require('moment')
-
-router.get('/', async (req, res) => {
+router.get('/', checkAuthenticated, async (req, res) => {
     let query = Ticket.find({ state: 'Open' }).sort({ createdAt: -1 })
     try {
         const tickets = await query.exec()
@@ -16,7 +15,7 @@ router.get('/', async (req, res) => {
     }
 })
 
-router.get('/history', async (req, res) => {
+router.get('/history', checkAuthenticated, async (req, res) => {
     let query = Ticket.find({ state: 'Close' }).sort({ createdAt: -1 })
     try {
         const tickets = await query.exec()
@@ -27,8 +26,9 @@ router.get('/history', async (req, res) => {
     }
 })
 
-router.get('/new', (req, res) => {
-    res.render('tickets/new', { ticket: new Ticket() })
+router.get('/new', checkAuthenticated,  async (req, res) => {
+    console.log("TO:", Object.keys( await req.user ));
+    res.render('tickets/new', { ticket: new Ticket(), name: await req.user['_doc'] })
 })
 
 router.post('/new', async (req, res) => {
@@ -48,12 +48,10 @@ router.post('/new', async (req, res) => {
     }
 })
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", checkAuthenticated, async (req, res) => {
     try {
         const ticket = await Ticket.findById(req.params.id).exec()
-        const a = moment(ticket.createdAt).format('Do MMM YYYY, hh:mm:ss');
-        const b = moment(ticket.createdAt).startOf('hour').fromNow();
-        res.render('tickets/show', { ticket: ticket, a: a, b: b })
+        res.render('tickets/show', { ticket: ticket })
     }
     catch (e) {
         console.log(e)
@@ -81,7 +79,7 @@ router.put('/:id', async (req, res) => {
     }
 })
 
-router.get('/:id/edit', async (req, res) => {
+router.get('/:id/edit', checkAuthenticated, async (req, res) => {
     try {
         const ticket = await Ticket.findById(req.params.id)
         res.render("tickets/edit", { ticket: ticket })
@@ -90,7 +88,7 @@ router.get('/:id/edit', async (req, res) => {
     }
 })
 
-router.get('/:id/close', async (req, res) => {
+router.get('/:id/close', checkAuthenticated, async (req, res) => {
     let ticket
     try {
         ticket = await Ticket.findById(req.params.id)
@@ -104,12 +102,12 @@ router.get('/:id/close', async (req, res) => {
     }
 })
 
-const sendMail = (to, subject, text) => {
+const sendMail = (to, subject, text) => { 
     var nodemailer = require('nodemailer');
 
     var transporter = nodemailer.createTransport({
-        host: process.env.MAILER_HOST, //smtp
-        port: process.env.MAILER_PORT,
+        host: process.env.MAILER_HOST_SMTP, //smtp
+        port: process.env.MAILER_PORT_SMTP,
         secure: process.env.MAILER_SECURE, 
         auth: {
             user: process.env.MAILER_LOGIN,
@@ -118,10 +116,12 @@ const sendMail = (to, subject, text) => {
     });
 
     var mailOptions = {
-        from: process.env.MAILER_LOGIN,
-        to: to,
+        from: process.env.MAILER_LOGIN,   
+        to: 'jerzy.kubisiak@gmail.com', //to
         subject: subject,
-        text: text
+        // text: text,
+        // html: text
+        html: `<h1>Welcome</h1><p>That was easy!${text}</p>`
     };
 
     transporter.sendMail(mailOptions, function (error, info) {
