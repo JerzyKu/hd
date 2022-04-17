@@ -12,6 +12,8 @@ const session = require('express-session')
 const Users = require('./models/user')
 const methodOverride = require('method-override')
 
+const checkBuildInAdmin = require('./middleware/checkBuildInAdmin')
+
 const initPassport = require('./passport-config')
 initPassport(passport, async (email) => {
   let usersOut
@@ -65,7 +67,10 @@ mongoose.connect(process.env.DATABASE_URL, {
 })
 const db = mongoose.connection
 db.on('error', e => console.error(e))
-db.once('open', e => console.log('Connected to mongoose'))
+db.once('open', e => {
+  console.log('Connected to mongoose'); 
+  checkBuildInAdmin();
+})
 
 app.use('/tickets', ticketRouter)
 app.use('/', indexRouter)

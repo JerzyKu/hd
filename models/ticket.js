@@ -18,7 +18,12 @@ const ticketSchema = new mongoose.Schema({
         type: String,
         required: true,
         default: "Open"
-    }
+    },
+    owner: {
+        type: String
+    },
+    
+
 })
 
 module.exports = mongoose.model('Ticket', ticketSchema)
