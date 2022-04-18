@@ -1,5 +1,5 @@
-know bugs: 
-new instance of dbs have no user <- fixed
+know bugs: <br>
+~~ new instance of dbs have no user <- fixed
 header is no longer working properly due to move project to bootstrap 5
 
 future features: 
