@@ -6,14 +6,36 @@
 
     <div>
         <label for="description"  class="form-label">Description: </label>
-        <textarea name="description" class="form-control"  cols="30" rows="10" required><%= ticket.description %></textarea>
+        <textarea name="description" class="form-control"  cols="30" rows="6" required><%= ticket.description %></textarea>
+    </div>
+    
+    <div>
+        <label for="sender" class="form-label">Sender:</label>
+        <select name="sender" id="sender" class="selectpicker">
+            <option value="none">none</option>
+            <option value="none">none</option>
+            <option value="none">none</option>
+            <option value="none">none</option>
+            <option value="none">none</option>
+            <option value="none">none</option>
+            <option value="none">none</option>
+            <option value="none">none</option>
+            <option value="none">none</option>
+            <option value="none">none</option>
+            <option value="none">none</option>
+            <option value="none">none</option>
+            <option value="none">none</option>
+            <option value="none">none</option>
+            <option value="none">none</option>
+        </select>          
     </div>
 
-    <DIV>
-        <label for="state">Status: </label>
-        <select name="state" id="">
+      
+    <div>
+        <label for="state" class="form-label">Status: </label>
+        <select name="state" id="" class="form-control">
             <option value="Open">Open</option>
             <option value="Close">Close</option>
         </select>
-    </DIV>
+    </div>
     

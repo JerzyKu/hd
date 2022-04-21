@@ -19,6 +19,15 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         required: true,
         default: true
+    },
+    name: {
+        type: String
+    },
+    surname: {
+        type: String
+    }, 
+    title: {
+        type: String
     }
 })
 

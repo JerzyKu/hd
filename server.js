@@ -40,6 +40,7 @@ initPassport(passport, async (email) => {
 const ticketRouter = require('./routes/tickets')
 const indexRouter = require('./routes/index')
 const loginRouter = require('./routes/login')
+const userRouter = require('./routes/users')
 
 app.set('view engine', 'ejs')
 app.set('views', __dirname + '/views')
@@ -75,6 +76,7 @@ db.once('open', e => {
 app.use('/tickets', ticketRouter)
 app.use('/', indexRouter)
 app.use('/login', loginRouter)
+app.use('/users', userRouter)
 
 app.listen(process.env.PORT || 3000, () => {console.log(`App listen on port: ${process.env.PORT || 3000}`)})
 

@@ -20,10 +20,13 @@ const ticketSchema = new mongoose.Schema({
         default: "Open"
     },
     owner: {
-        type: String
+        type: mongoose.Schema.Types.ObjectId,
+        res: 'user'
     },
-    
-
+    sender: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Sender'
+    }
 })
 
 module.exports = mongoose.model('Ticket', ticketSchema)
