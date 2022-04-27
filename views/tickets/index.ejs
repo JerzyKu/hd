@@ -18,12 +18,16 @@
                     <div class="card-body">
                         <h3 class="card-title"><%= ticket.title %></h3>
                         <!-- <strong>Description:</strong>  -->
-                        <p class="text-truncate"><%= ticket.description %></p> <br>
+                        <p class="text-truncate"><%= ticket.description %></p>
                         <strong>State:</strong><span class="text-muted"> <%= ticket.state %></span> <br>
+                        <strong>Owner:</strong>
+                        <% if(ticket.owner){ %> 
+                            <span class="text-muted"><%= ticket.owner.name %> <%= ticket.owner.surname %> - <%= ticket.owner.title %></span>
+                        <% } %> 
                         <p class="text-truncate"><strong>Created: </strong><span class="text-muted"><%= String(ticket.createdAt).slice(4, 21) %></span></p>
                         </div>
                     <div class="card-footer">
-                        <a href="/tickets/<%= ticket.id %>" class="btn btn-primary btn-sm">View</a>
+                        <!-- <a href="/tickets/<%= ticket.id %>" class="btn btn-primary btn-sm">View</a> -->
                         <a href="/tickets/<%= ticket.id %>/edit" class="btn btn-primary btn-sm">Edit</a>
                         <a href="/tickets/<%= ticket.id %>/close" class="btn btn-primary btn-sm">Close</a>
                     

@@ -3,12 +3,18 @@ const router = express.Router()
 const checkAuthenticated = require('../middleware/checkAuthenticated')
 
 const Ticket = require('../models/ticket')
+const Users = require('../models/user')
 
 router.get('/', checkAuthenticated, async (req, res) => {
-    let query = Ticket.find({ state: 'Open' }).sort({ createdAt: -1 })
+    let query = await Ticket
+        .find({ state: 'Open' })
+        .sort({ createdAt: -1 })
+        .populate({path: 'owner', model:'user'})
+        .exec();
+    
     try {
-        const tickets = await query.exec()
-        res.render('tickets/index', { tickets: tickets })
+        
+        res.render('tickets/index', { tickets: query })
     } catch (e) {
         console.log(e);
         res.redirect('/tickets/new')
@@ -16,10 +22,14 @@ router.get('/', checkAuthenticated, async (req, res) => {
 })
 
 router.get('/history', checkAuthenticated, async (req, res) => {
-    let query = Ticket.find({ state: 'Close' }).sort({ createdAt: -1 })
+    
     try {
-        const tickets = await query.exec()
-        res.render('tickets/index', { tickets: tickets })
+        let query = await Ticket
+            .find({ state: 'Close' })
+            .sort({ createdAt: -1 })
+            .populate({path: 'owner', model:'user'})
+            .exec();
+        res.render('tickets/index', { tickets: query })
     } catch (e) {
         console.log(e);
         res.redirect('/tickets/new')
@@ -27,26 +37,36 @@ router.get('/history', checkAuthenticated, async (req, res) => {
 })
 
 router.get('/new', checkAuthenticated,  async (req, res) => {
-    console.log("TO:", Object.keys( await req.user ));
-    res.render('tickets/new', { ticket: new Ticket(), name: await req.user['_doc'] })
+    try {
+        const user = await Users.find()
+        res.render('tickets/new', { ticket: new Ticket(), users: user})
+    } catch (error) {
+        console.log(error);
+    }
 })
 
 router.post('/new', async (req, res) => {
     const ticket = new Ticket({
         title: req.body.title,
-        description: req.body.description
+        description: req.body.description,
+        state: req.body.state
     })
+    console.log("req.body.owner: ", req.body.owner);
+    if (req.body.owner != 'none') {
+        ticket.owner = req.body.owner
+    }
 
     try {
         const newTicket = await ticket.save()
         res.redirect('/tickets/new')
-        sendMail('jerzy.kubisiak@gmail.com', `New ticket: ${ticket.title}`, ticket.description)
+        //sendMail('jerzy.kubisiak@gmail.com', `New ticket: ${ticket.title}`, ticket.description)
 
     } catch (e) {
         console.log(e);
         res.render('tickets/new', { ticket: new Ticket() })
     }
 })
+
 
 router.get("/:id", checkAuthenticated, async (req, res) => {
     try {
@@ -67,6 +87,11 @@ router.put('/:id', async (req, res) => {
         ticket.title = req.body.title
         ticket.state = req.body.state
         ticket.description = req.body.description
+        if ( req.body.owner == 'undefined'){
+            ticket.owner = undefined
+        } else {
+            ticket.owner = req.body.owner
+        }
         await ticket.save()
         res.redirect(`/tickets/${ticket.id}`)
     } catch (e) {
@@ -82,7 +107,8 @@ router.put('/:id', async (req, res) => {
 router.get('/:id/edit', checkAuthenticated, async (req, res) => {
     try {
         const ticket = await Ticket.findById(req.params.id)
-        res.render("tickets/edit", { ticket: ticket })
+        const user = await Users.find()
+        res.render("tickets/edit", { ticket: ticket, users: user })
     } catch (e) {
         res.redirect('/tickets')
     }

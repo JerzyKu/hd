@@ -14,7 +14,7 @@ function initialize(passport, getUserByEmail, getUserById){
             //done: error, user, message
             return done(null, false, {message: 'No user with that email.'})
         }
-        console.log("USER", user[0].password);
+        // console.log("USER", user[0].password);
 
 
         try {

@@ -8,34 +8,26 @@
         <label for="description"  class="form-label">Description: </label>
         <textarea name="description" class="form-control"  cols="30" rows="6" required><%= ticket.description %></textarea>
     </div>
-    
+
     <div>
-        <label for="sender" class="form-label">Sender:</label>
-        <select name="sender" id="sender" class="selectpicker">
-            <option value="none">none</option>
-            <option value="none">none</option>
-            <option value="none">none</option>
-            <option value="none">none</option>
-            <option value="none">none</option>
-            <option value="none">none</option>
-            <option value="none">none</option>
-            <option value="none">none</option>
-            <option value="none">none</option>
-            <option value="none">none</option>
-            <option value="none">none</option>
-            <option value="none">none</option>
-            <option value="none">none</option>
-            <option value="none">none</option>
-            <option value="none">none</option>
+        <label for="owner" class="form-label">Owner:</label>
+        <select name="owner" id="owner" class="form-control">
+            <option value="undefined">none</option>
+            
+            <% users.forEach((el) => { %> 
+                <option value="<%= el.id %>" <% if (el.id == ticket.owner ){ %> selected <% } %>>
+                    <%= el.name %> <%= el.surname %> - <%= el.title %>
+                </option>
+            <% }) %> 
+            
         </select>          
     </div>
-
       
     <div>
         <label for="state" class="form-label">Status: </label>
         <select name="state" id="" class="form-control">
-            <option value="Open">Open</option>
-            <option value="Close">Close</option>
+            <option value="Open" <% if (ticket.state == 'Open'){ %> selected <% } %>>Open</option>
+            <option value="Close" <% if (ticket.state == 'Close'){ %> selected <% } %>> Close </option>
         </select>
     </div>
     

@@ -1,16 +1,16 @@
 <%- include('../partials/header') %>
 
 <div class="card offset-md-3 col-md-6 mt-2">
-    <h2 class="text-center">sgow User:</h2>
+    <h2 class="text-center">Edit User:</h2>
     <div class="card-body">
 
-        <form action="" method="post">
+        <form action="/users/<%= user.id %>?_method=PUT" method="post">
 
             <%- include('_formFields', {user: user}) %>
 
             <div>
                 <a href="/users" class="btn btn-danger">Cancel</a>
-                <button type="submit"  class="btn btn-success">update</button>
+                <button type="submit"  class="btn btn-success">Update</button>
             </div>
 
         </form>

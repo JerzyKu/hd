@@ -5,24 +5,26 @@
 
   <a href="/users/new" class="btn">new</a>
 
-  <table class="table">
-        <thead>
+  <table class="table table-striped table-hover table-light">
+        <thead class="table-light">
           <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Surname</th>
+            <th scope="col">Tittle</th>
             <th scope="col">Email</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
             <th scope="col">Action</th>
           </tr>
         </thead>
         <tbody>
           <% thing.forEach((ele) => { %>
               <tr>
+                <td><%= ele.id %> </td>
+                <td><%= ele.name %> </td>
+                <td><%= ele.surname %> </td>
+                <td><%= ele.title %> </td>
                 <td><%= ele.email %> </td>
-                <td><%= ele.email %> </td>
-                <td><%= ele.email %> </td>
-                <td>
-                  <a href="/users/<%= ele.id %> " class="btn">edit</a>
-                </td>
+                <td><a href="/users/<%= ele.id %> " class="btn btn-rounded">edit</a></td>
               </tr>
           <% }) %> 
         </tbody>
